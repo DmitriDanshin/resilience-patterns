@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/resilience-patterns/static/css/main.64c68699.css",
-    "main.js": "/resilience-patterns/static/js/main.65ad7857.js",
+    "main.css": "/resilience-patterns/static/css/main.65545590.css",
+    "main.js": "/resilience-patterns/static/js/main.97dda151.js",
     "static/js/453.4992683b.chunk.js": "/resilience-patterns/static/js/453.4992683b.chunk.js",
     "index.html": "/resilience-patterns/index.html",
-    "main.64c68699.css.map": "/resilience-patterns/static/css/main.64c68699.css.map",
-    "main.65ad7857.js.map": "/resilience-patterns/static/js/main.65ad7857.js.map",
+    "main.65545590.css.map": "/resilience-patterns/static/css/main.65545590.css.map",
+    "main.97dda151.js.map": "/resilience-patterns/static/js/main.97dda151.js.map",
     "453.4992683b.chunk.js.map": "/resilience-patterns/static/js/453.4992683b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.64c68699.css",
-    "static/js/main.65ad7857.js"
+    "static/css/main.65545590.css",
+    "static/js/main.97dda151.js"
   ]
 }
