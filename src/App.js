@@ -12,7 +12,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Navigate to="/circuit-breaker" replace />
+      element: <Navigate to="/timeout" replace />
     },
     {
       path: '/:pattern',
