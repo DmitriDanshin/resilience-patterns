@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import CircuitBreakerVisualizer from './CircuitBreakerVisualizer';
 import BulkheadVisualizer from './BulkheadVisualizer';
 import RetryVisualizer from './RetryVisualizer';
@@ -6,10 +7,22 @@ import TimeoutVisualizer from './TimeoutVisualizer';
 import FallbackVisualizer from './FallbackVisualizer';
 
 const ResiliencePatternsApp = () => {
-  const [activePattern, setActivePattern] = useState('circuit-breaker');
+  const { pattern } = useParams();
+  const navigate = useNavigate();
+  
+  // Проверяем, является ли паттерн допустимым
+  const validPatterns = ['circuit-breaker', 'bulkhead', 'retry', 'timeout', 'fallback'];
+  
+  // Если паттерн из URL не является допустимым, перенаправляем на circuit-breaker
+  useEffect(() => {
+    if (!validPatterns.includes(pattern)) {
+      navigate('/circuit-breaker', { replace: true });
+    }
+  }, [pattern, navigate]);
 
+  // Функция для рендеринга компонента выбранного паттерна
   const renderPatternComponent = () => {
-    switch (activePattern) {
+    switch (pattern) {
       case 'circuit-breaker':
         return <CircuitBreakerVisualizer />;
       case 'bulkhead':
@@ -25,55 +38,77 @@ const ResiliencePatternsApp = () => {
     }
   };
 
+  // Обработчик изменения паттерна
+  const handlePatternChange = (newPattern) => {
+    navigate(`/${newPattern}`);
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Resilience Patterns Visualizer</h1>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">Паттерны устойчивости</h1>
       
-      <div className="mb-6">
-        <div className="flex flex-wrap justify-center gap-2">
-          <button 
-            className={`px-4 py-2 rounded-full ${activePattern === 'circuit-breaker' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActivePattern('circuit-breaker')}
+      <div className="flex justify-center mb-8">
+        <div className="inline-flex rounded-md shadow-sm" role="group">
+          <button
+            type="button"
+            className={`px-4 py-2 text-sm font-medium border ${
+              pattern === 'circuit-breaker'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            } rounded-l-lg`}
+            onClick={() => handlePatternChange('circuit-breaker')}
           >
             Circuit Breaker
           </button>
-          
-          <button 
-            className={`px-4 py-2 rounded-full ${activePattern === 'bulkhead' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActivePattern('bulkhead')}
+          <button
+            type="button"
+            className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${
+              pattern === 'bulkhead'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+            onClick={() => handlePatternChange('bulkhead')}
           >
             Bulkhead
           </button>
-          
-          <button 
-            className={`px-4 py-2 rounded-full ${activePattern === 'retry' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActivePattern('retry')}
+          <button
+            type="button"
+            className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${
+              pattern === 'retry'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+            onClick={() => handlePatternChange('retry')}
           >
             Retry
           </button>
-          
-          <button 
-            className={`px-4 py-2 rounded-full ${activePattern === 'timeout' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActivePattern('timeout')}
+          <button
+            type="button"
+            className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${
+              pattern === 'timeout'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+            onClick={() => handlePatternChange('timeout')}
           >
             Timeout
           </button>
-          
-          <button 
-            className={`px-4 py-2 rounded-full ${activePattern === 'fallback' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActivePattern('fallback')}
+          <button
+            type="button"
+            className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${
+              pattern === 'fallback'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            } rounded-r-lg`}
+            onClick={() => handlePatternChange('fallback')}
           >
             Fallback
           </button>
         </div>
       </div>
       
-      <div className="max-w-4xl mx-auto">
+      <div className="bg-white p-6 rounded-lg shadow-md">
         {renderPatternComponent()}
-      </div>
-      
-      <div className="mt-8 text-center text-gray-500 text-sm">
-        <p>Resilience Patterns Visualizer © 2025 - Интерактивный демонстратор паттернов устойчивости</p>
       </div>
     </div>
   );
