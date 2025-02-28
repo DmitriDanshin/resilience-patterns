@@ -85,17 +85,6 @@ const ResiliencePatternsApp = () => {
           <button
             type="button"
             className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${
-              pattern === 'bulkhead'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
-            }`}
-            onClick={() => handlePatternChange('bulkhead')}
-          >
-            Bulkhead
-          </button>
-          <button
-            type="button"
-            className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${
               pattern === 'fallback'
                 ? 'bg-blue-600 text-white'
                 : 'bg-white text-gray-700 hover:bg-gray-100'
@@ -103,6 +92,17 @@ const ResiliencePatternsApp = () => {
             onClick={() => handlePatternChange('fallback')}
           >
             Fallback
+          </button>
+          <button
+            type="button"
+            className={`px-4 py-2 text-sm font-medium border-t border-b border-r ${
+              pattern === 'bulkhead'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+            onClick={() => handlePatternChange('bulkhead')}
+          >
+            Bulkhead
           </button>
         </div>
       </div>
